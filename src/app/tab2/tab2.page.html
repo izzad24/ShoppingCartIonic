@@ -1,9 +1,23 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab Two
+      Product list
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let product of products; let i = index">
+      <ion-thumbnail slot="start">
+        <ion-img src="{{product.img}}"></ion-img>
+      </ion-thumbnail>
+      <ion-label class="ion-text-wrap" (click) = "navigate(i)">{{product.name}}</ion-label>
+      <ion-label id="price">RM{{product.totalPrice}}</ion-label>
+      <ion-button (click) = "addQty(i)"><ion-icon name="add" ></ion-icon></ion-button>
+      <p>{{product.qty}}</p>
+      <ion-button (click) = "minusQty(i)"><ion-icon name="remove" ></ion-icon></ion-button>
+      <ion-button (click) = "addToCart(i)" slot="end"><ion-icon name="cart"></ion-icon></ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

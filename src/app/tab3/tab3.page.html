@@ -1,9 +1,28 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab Three
+      Shopping Cart
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let product of carts; let i = index">
+      <ion-thumbnail slot="start">
+        <ion-img src="{{product.img}}"></ion-img>
+      </ion-thumbnail>
+      <ion-label class="ion-text-wrap">{{product.name}}</ion-label>
+      <ion-label>{{product.qty}}</ion-label>
+      <ion-label id="price">RM{{product.totalPrice}}</ion-label>
+      <ion-button (click) = "removeItem(i)" slot="end"><ion-icon name="trash"></ion-icon></ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-item>
+      <ion-label >Total Price</ion-label>
+      <ion-label slot="end">RM{{totalCartPrice}}</ion-label>
+  </ion-item>
+</ion-footer>

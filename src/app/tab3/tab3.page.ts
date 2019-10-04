@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-tab3',
@@ -6,7 +7,20 @@ import { Component } from '@angular/core';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
+  carts = []
+  totalCartPrice = 0
+  constructor(private prodServices: ProductService) {}
 
-  constructor() {}
+  ngOnInit(){
+    this.prodServices.carts.subscribe(data =>{
+      this.carts = data
+    })
+    this.prodServices.totalCartPrice.subscribe(totalPrice =>{
+      this.totalCartPrice = totalPrice
+    })
+  }
 
+  removeItem(idx){
+    this.prodServices.removeFromCart(idx)
+  }
 }
