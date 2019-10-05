@@ -13,8 +13,8 @@ export class ProductService {
       addedToCart: false,
       qty: 1,
       maxQty: 30,
-      price: 79.99,
-      totalPrice: 79.99,
+      price: 79.00,
+      totalPrice: 79.00,
       img: "https://cdn7.bigcommerce.com/s-ri46k1gj8c/product_images/uploaded_images/steel-tip-darts.jpg",
       details: ["Switch your point length, style and color in seconds",
       "Pocket sized SP tool (SOLD SEPARATELY) is all you need to switch your points. Patented locking system using taper and threaded technology ensures your points stay locked in during play",
@@ -29,8 +29,8 @@ export class ProductService {
       addedToCart: false,
       qty: 1,
       maxQty: 30,
-      price: 119.99,
-      totalPrice: 119.99,
+      price: 120.00,
+      totalPrice: 120.00,
       img: "https://cdn7.bigcommerce.com/s-ri46k1gj8c/product_images/uploaded_images/soft-tip-darts.jpg",
       details: [
         "90% Tungsten barrels",
@@ -45,8 +45,8 @@ export class ProductService {
       addedToCart: false,
       qty: 1,
       maxQty: 10,
-      price: 49.99,
-      totalPrice: 49.99,
+      price: 49.50,
+      totalPrice: 49.50,
       img: "https://cdn11.bigcommerce.com/s-ri46k1gj8c/images/stencil/1920w/products/5268/14380/viper%20Razorback%2042-6006__99232.1534031551.jpg",
       details: [
         "Completely staple-free spider for to eliminate bounce-outs",
@@ -61,7 +61,7 @@ export class ProductService {
 
   carts = new BehaviorSubject([])
   totalCartPrice = new BehaviorSubject(0)
-  // tempCarts = []
+  itemCount = new BehaviorSubject(0)
 
   constructor() { }
 
@@ -86,12 +86,9 @@ export class ProductService {
   addToCart(idx: number){
     let product = this.products.getValue()
     let tempCart = this.carts.getValue()
-    // console.log(tempCart)
+ 
     tempCart.push(product.splice(idx, 1)[0])
     this.calculateTotalPrice()
-    // console.log(product)
-    // console.log(this.carts.value)
-    // console.log(tempCart)
     }
 
   removeFromCart(idx: number){
@@ -109,5 +106,6 @@ export class ProductService {
       tempPrice += item.totalPrice
     }
     this.totalCartPrice.next(tempPrice)
+    this.itemCount.next(cart.length)
   }
 }
